@@ -243,26 +243,11 @@
 										<td><input type="date" name="agreement_end_date" id="agreement_end_date" class="form-control border-0" value="<?php echo $agreement_end_date; ?>" required></td>
 									</tr>
 									<tr>
-										<th rowspan="6" class="text-center">Address</th>
-										<th class="text-center">Flat #</th>
-										<td><input type="text" name="flat_no" class="form-control border-0" placeholder="Enter Flat No" value="<?php echo $flat_no; ?>"></td>
+										<th rowspan="2" class="text-center">Address</th>
+										<th class="text-center">Address</th>
+										<td><input type="text" name="bldg_nm" class="form-control border-0" placeholder="Enter Flat, Floor, Bldg Name, Plot, sector" value="<?php echo $bldg_nm; ?>"></td>
 									</tr>
-									<tr>
-										<th class="text-center">Floor</th>
-										<td><input type="text" name="floor_no" class="form-control border-0" placeholder="Enter Floor No" value="<?php echo $floor_no; ?>"></td>
-									</tr>
-									<tr>
-										<th class="text-center">Plot</th>
-										<td><input type="text" name="plot_no" class="form-control border-0" placeholder="Enter Plot No" value="<?php echo $plot_no; ?>"></td>
-									</tr>
-									<tr>
-										<th class="text-center">Bldg Name.</th>
-										<td><input type="text" name="bldg_nm" class="form-control border-0" placeholder="Enter Building No" value="<?php echo $bldg_nm; ?>"></td>
-									</tr>
-									<tr>
-										<th class="text-center">Sector</th>
-										<td><input type="text" name="sector_no" class="form-control border-0" placeholder="Enter Sector No" value="<?php echo $sector_no; ?>"></td>
-									</tr>
+
 									<tr>
 										<th class="text-center">Location</th>
 										<td><input type="text" name="location" class="form-control border-0" placeholder="Enter Location" value="<?php echo $location; ?>" required></td>
@@ -443,16 +428,20 @@
             						<tr>
 	        							<th class="text-center">Profit / Balance</th>
 	        							<?php
+	        							$balance_badge_class = "";
 	        							$balance_amt = 0;
 	        							if(isset($total_amt) && isset($received_amt)){
-	        								$balance_amt = $total_amt - $received_amt;
+	        								$balance_amt = $received_amt - $total_amt;
+	        								$balance_badge_class = ($balance_amt>=0) ? "bg-success" : "bg-danger";
 	        							}
 	        							?>
-	        							<td><input type="tel" name="balance_amt" onkeypress="return isNumber(event)" class="form-control border-0" value="<?php echo $balance_amt;?>" disabled></td>
+	        							<td>
+	        								<span class="badge balance-badge <?php echo $balance_badge_class;?>" style="font-size: 14px;"><?php echo $balance_amt;?></span>
+	        							</td>
 	        						</tr>
     								<tr>
-    									<th class="text-center">Challan Amount</th>
-    									<td><input type="tel" name="challan_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Challan Amount without ',' and '/-'" value="<?php if(!empty($challan_amt)){ echo $challan_amt; } ?>"></td>
+    									<th class="text-center">Quotation Amount</th>
+    									<td><input type="tel" name="challan_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Quotation Amount without ',' and '/-'" value="<?php if(!empty($challan_amt)){ echo $challan_amt; } ?>"></td>
     								</tr>
 									<tr>
 										<th class="text-center">Comments</th>

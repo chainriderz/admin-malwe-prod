@@ -1,6 +1,8 @@
 <?php 
 include("header.php");
 
+include("common_function.php");
+
 function getAll($con, $query){
 	$data = [];
 	$res_reg = mysqli_query($con, $query);
@@ -264,29 +266,8 @@ $staff_arr = array_column($staff_data, 'name', 'sid');
 					<td><?php echo $location; ?></td>
 					<td>
 					    <?php
-					        if(!empty($total_amt) || !empty($received_amt))
-					        {
-						        $amt = $total_amt - $received_amt;
-						        
-						        if($amt == '0')
-						        {
-					    ?>
-					            <span class="badge badge-success" style="font-size: 14px;"><?php echo $total_amt; ?></span>
-					    <?php
-						        }
-						        elseif($received_amt <= $total_amt && !($received_amt <= '0'))
-						        {
-					    ?>
-					            <span class="badge badge-danger" style="font-size: 14px;">-<?php echo $amt; ?></span>
-					    <?php 
-						        }
-						        else
-						        {
-					    ?>
-					            <span class="badge badge-primary" style="font-size: 14px;"><span class="d-none"></span><?php echo $amt; ?></span>
-					    <?php
-					            }
-							}
+					    	$amt = $received_amt - $total_amt;
+					        echo showProfitBal($amt);
 					    ?>
 					</td>
 					<td><?php echo $deli_status; ?></td>

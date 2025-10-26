@@ -18,10 +18,27 @@ $(document).ready(function ()
   function calculateBalance() {
       let total = parseFloat($('input[name="total_amt"]').val()) || 0;
       let received = parseFloat($('input[name="received_amt"]').val()) || 0;
-      let balance = total - received;
+      
+      // ✅ Corrected logic: balance = received - total
+      let balance = received - total;
 
+      // Update hidden/display inputs
       $('input[name="balance_amt_disply"]').val(balance);
       $('input[name="balance_amt"]').val(balance);
+
+      // ✅ Update the badge dynamically
+      const badge = $('.balance-badge');
+      badge.text(balance.toFixed(2)); // show with 2 decimals
+
+      // Remove any old color classes
+      badge.removeClass('bg-success bg-danger');
+
+      // Apply class based on value
+      if (balance >= 0) {
+          badge.addClass('bg-success');
+      } else {
+          badge.addClass('bg-danger');
+      }
   }
 
   // Event: When any calc field changes → update total & balance

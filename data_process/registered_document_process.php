@@ -1,7 +1,9 @@
 <?php
 include("../../config.php");
 
-$sql = "SELECT reg_id, timestamp, token, owner_name, owner_mobile, owner_dob , alt_owner_name, alt_owner_mobile, alt_owner_dob, tenant_name, tenant_mobile, tenant_dob, alt_tenant_name, alt_tenant_mobile, alt_tenant_dob, agreement_start_date,  agreement_end_date, r1.location AS location, delivery_status, record_status, labels, total_amt, received_amt, (`total_amt` - `received_amt`) AS `amount`, challan_amt, DATEDIFF(`agreement_end_date`, CURDATE()) AS `date_diff`, a1.agent_name AS aname, a1.mobile_no AS amobileno, s1.name AS sname, r1.upload_1, r1.upload_2, r1.upload_3, r1.upload_4, r1.upload_5 FROM registered_document AS r1, staff AS s1, agent AS a1 WHERE r1.`agent_name` = a1.agent_id AND r1.`staff_name` = s1.sid ";
+include("../common_function.php");
+
+$sql = "SELECT reg_id, timestamp, token, owner_name, owner_mobile, owner_dob , alt_owner_name, alt_owner_mobile, alt_owner_dob, tenant_name, tenant_mobile, tenant_dob, alt_tenant_name, alt_tenant_mobile, alt_tenant_dob, agreement_start_date,  agreement_end_date, r1.location AS location, delivery_status, record_status, labels, total_amt, received_amt, (`received_amt` - `total_amt`) AS `amount`, challan_amt, DATEDIFF(`agreement_end_date`, CURDATE()) AS `date_diff`, a1.agent_name AS aname, a1.mobile_no AS amobileno, s1.name AS sname, r1.upload_1, r1.upload_2, r1.upload_3, r1.upload_4, r1.upload_5 FROM registered_document AS r1, staff AS s1, agent AS a1 WHERE r1.`agent_name` = a1.agent_id AND r1.`staff_name` = s1.sid ";
 
 if(isset($_GET['status']) && $_GET['status']){
     $sql = $sql . " AND r1.record_status = '{$_GET['status']}' ";
@@ -94,7 +96,7 @@ while( $rows = mysqli_fetch_assoc($resultset) ) {
                                   <a target=\"_blank\" href=\"https://wa.me/91{$agent_mobile}\" class=\"text-success\" style=\"vertical-align:middle; text-decoration:none;\"><i class=\"la la-2x la-whatsapp\"></i></a>";
     }
     
-    if($total_amt > 0){
+    /*if($total_amt > 0){
         if($rows['amount'] == 0){
             $rows['amount'] = "<span class=\"badge badge-success\" style=\"font-size: 14px;\">{$total_amt}</span>";
         } elseif ($rows['amount'] > 0 && $received_amt > 0) {
@@ -104,7 +106,8 @@ while( $rows = mysqli_fetch_assoc($resultset) ) {
         }
     } else {
         $rows['amount'] = null;
-    }
+    }*/
+    $rows['amount'] = showProfitBal($rows['amount']);
     $data[] = $rows;
 
     foreach ($excelColumns as $key => $value) {

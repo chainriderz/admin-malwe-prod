@@ -184,11 +184,11 @@
         						</tr>
         						<tr>
         							<th class="text-center">Profit / Balance</th>
-        							<td><input type="tel" name="balance_amt" onkeypress="return isNumber(event)" class="form-control border-0" value="0" disabled></td>
+        							<td><span class="badge balance-badge" style="font-size: 14px;">0</span></td>
         						</tr>
 								<tr>
-									<th class="text-center">Challan Amount</th>
-									<td><input type="tel" name="challan_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Challan Amount without ',' and '/-'"></td>
+									<th class="text-center">Quotation Amount</th>
+									<td><input type="tel" name="challan_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Quotation Amount without ',' and '/-'"></td>
 								</tr>
 								<tr>
 									<th class="text-center">Comments</th>
