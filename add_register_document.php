@@ -19,7 +19,7 @@
 									<td width="60%"><input type="tel" minlength="14" maxlength="14" id="token_no" onchange="CheckTokenLength(this.value)" onkeyup="CheckToken(this.value, undefined)" onkeypress="return isNumber(event)" name="token" class="form-control border-0" placeholder="Enter Token" required><p id="token_error" class="text-left"></p></td>
 								</tr>
 								<tr>
-									<th rowspan="3" class="text-center">Owner</th>
+									<th rowspan="2" class="text-center">Owner</th>
 									<th class="text-center">Name</th>
 									<td><input type="text" name="owner_name" class="form-control border-0" placeholder="Enter Owner Name" required></td>
 								</tr>
@@ -27,12 +27,12 @@
 									<th class="text-center">Mobile</th>
 									<td><input type="tel" maxlength="10" pattern="[6789][0-9]{9}" onkeypress="return isNumber(event)" name="owner_mobile" class="form-control border-0" placeholder="Enter Owner Mobile"></td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<th class="text-center">Date of Birth</th>
 									<td><input type="date" name="owner_dob" id="owner_dob" class="form-control border-0"></td>
-								</tr>
+								</tr> -->
 								<tr>
-									<th rowspan="3" class="text-center">2nd Owner</th>
+									<th rowspan="2" class="text-center">2nd Owner</th>
 									<th class="text-center">Name</th>
 									<td><input type="text" name="alt_owner_name" class="form-control border-0" placeholder="Enter Owner Name"></td>
 								</tr>
@@ -40,12 +40,12 @@
 									<th class="text-center">Mobile</th>
 									<td><input type="tel" maxlength="10" pattern="[6789][0-9]{9}" onkeypress="return isNumber(event)" name="alt_owner_mobile" class="form-control border-0" placeholder="Enter Owner Mobile"></td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<th class="text-center">Date of Birth</th>
 									<td><input type="date" name="alt_owner_dob" id="alt_owner_dob" class="form-control border-0"></td>
-								</tr>
+								</tr> -->
 								<tr>
-									<th rowspan="3" class="text-center">Tenant</th>
+									<th rowspan="2" class="text-center">Tenant</th>
 									<th class="text-center">Name</th>
 									<td><input type="text" name="tenant_name" class="form-control border-0" placeholder="Enter Tenant Name" required></td>
 								</tr>
@@ -53,12 +53,12 @@
 									<th class="text-center">Mobile</th>
 									<td><input type="tel" maxlength="10" pattern="[6789][0-9]{9}" onkeypress="return isNumber(event)" name="tenant_mobile" class="form-control border-0" placeholder="Enter Tenant Mobile"></td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<th class="text-center">Date of Birth</th>
 									<td><input type="date" name="tenant_dob" id="tenant_dob" class="form-control border-0"></td>
-								</tr>
+								</tr> -->
 								<tr>
-									<th rowspan="3" class="text-center">2nd Tenant</th>
+									<th rowspan="2" class="text-center">2nd Tenant</th>
 									<th class="text-center">Name</th>
 									<td><input type="text" name="alt_tenant_name" class="form-control border-0" placeholder="Enter Tenant Name"></td>
 								</tr>
@@ -66,10 +66,10 @@
 									<th class="text-center">Mobile</th>
 									<td><input type="tel" maxlength="10" pattern="[6789][0-9]{9}" onkeypress="return isNumber(event)" name="alt_tenant_mobile" class="form-control border-0" placeholder="Enter Tenant Mobile"></td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<th class="text-center">Date of Birth</th>
 									<td><input type="date" name="alt_tenant_dob" id="alt_tenant_dob" class="form-control border-0"></td>
-								</tr>
+								</tr> -->
 								<tr>
 									<th rowspan="2" class="text-center">Name</th>
 									<th class="text-center">Staff</th>
@@ -129,25 +129,9 @@
 									<td><input type="date" name="agreement_end_date" id="agreement_end_date" class="form-control border-0" required></td>
 								</tr>
 								<tr>
-									<th rowspan="6" class="text-center">Address</th>
-									<th class="text-center">Flat #</th>
-									<td><input type="text" name="flat_no" class="form-control border-0" placeholder="Enter Flat No"></td>
-								</tr>
-								<tr>
-									<th class="text-center">Floor</th>
-									<td><input type="text" name="floor_no" class="form-control border-0" placeholder="Enter Floor No"></td>
-								</tr>
-								<tr>
-									<th class="text-center">Plot</th>
-									<td><input type="text" name="plot_no" class="form-control border-0" placeholder="Enter Plot No"></td>
-								</tr>
-								<tr>
-									<th class="text-center">Bldg Name.</th>
-									<td><input type="text" name="bldg_nm" class="form-control border-0" placeholder="Enter Building Name"></td>
-								</tr>
-								<tr>
-									<th class="text-center">Sector</th>
-									<td><input type="text" name="sector_no" class="form-control border-0" placeholder="Enter Sector No"></td>
+									<th rowspan="2" class="text-center">Address</th>
+									<th class="text-center">Address</th>
+									<td><input type="text" name="bldg_nm" class="form-control border-0" placeholder="Enter Flat, Floor, Bldg Name, Plot, sector"></td>
 								</tr>
 								<tr>
 									<th class="text-center">Location</th>
@@ -161,13 +145,46 @@
 									</td>
 								</tr>
 								<tr>
-        						    <th rowspan="3" class="text-center">Amount</th>
-        							<th class="text-center">Quotation Amount</th>
-        							<td><input type="tel" name="total_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Amount without ',' and '/-'"></td>
+        						    <th rowspan="11" class="text-center">Amount</th>
+									<th class="text-center">Stamp Duty</th>
+									<td><input type="tel" name="stamp_duty" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Stamp Duty without ',' and '/-'"></td>
+								</tr>
+								<tr>
+									<th class="text-center">Reg + DHC</th>
+									<td><input type="tel" name="reg_dhc" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Reg + DHC without ',' and '/-'"></td>
+								</tr>
+								<tr>
+									<th class="text-center">NOC</th>
+									<td><input type="tel" name="noc" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter NOC ',' and '/-'"></td>
+								</tr>
+								<tr>
+									<th class="text-center">Staff Incentive</th>
+									<td><input type="tel" name="staff_incentive" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Staff Incentive without ',' and '/-'"></td>
+								</tr>
+								<tr>
+									<th class="text-center">Agent Paid</th>
+									<td><input type="tel" name="agent_paid" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Agent Paid without ',' and '/-'"></td>
+								</tr>
+								<tr>
+									<th class="text-center">Outside Visit</th>
+									<td><input type="tel" name="outside_visit" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Outside Visit without ',' and '/-'"></td>
+								</tr>
+								<tr>
+									<th class="text-center">Urgent Doc</th>
+									<td><input type="tel" name="urgent_doc" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Urgent Doc without ',' and '/-'"></td>
+								</tr>
+								<tr>
+        							<th class="text-center">Total Amount</th>
+        							<td><input type="tel" name="total_amt_disply" onkeypress="return isNumber(event)" class="form-control border-0" value="0" disabled></td>
+        							<input type="hidden" name="total_amt"value="0">
         						</tr>
         						<tr>
         							<th class="text-center">Received Amount</th>
         							<td><input type="tel" name="received_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Amount without ',' and '/-'"></td>
+        						</tr>
+        						<tr>
+        							<th class="text-center">Profit / Balance</th>
+        							<td><input type="tel" name="balance_amt" onkeypress="return isNumber(event)" class="form-control border-0" value="0" disabled></td>
         						</tr>
 								<tr>
 									<th class="text-center">Challan Amount</th>
@@ -283,9 +300,18 @@ if (isset($_POST['add_register']))
 	$bldg_nm = mysqli_real_escape_string($con, $_POST['bldg_nm']);
 	$sector_no = mysqli_real_escape_string($con, $_POST['sector_no']);
 	$location = mysqli_real_escape_string($con, $_POST['location']);
-	$total_amt = mysqli_real_escape_string($con, $_POST['total_amt']);
-	$received_amt = mysqli_real_escape_string($con, $_POST['received_amt']);
-	$challan_amt = mysqli_real_escape_string($con, $_POST['challan_amt']);
+
+	$stamp_duty = (float)($_POST['stamp_duty'] ?? 0);
+	$reg_dhc = (float)($_POST['reg_dhc'] ?? 0);
+	$noc = (float)($_POST['noc'] ?? 0);
+	$staff_incentive = (float)($_POST['staff_incentive'] ?? 0);
+	$agent_paid = (float)($_POST['agent_paid'] ?? 0);
+	$outside_visit = (float)($_POST['outside_visit'] ?? 0);
+	$urgent_doc = (float)($_POST['urgent_doc'] ?? 0);
+	$total_amt = (float)($_POST['total_amt'] ?? 0);
+	$received_amt = (float)($_POST['received_amt'] ?? 0);
+	$challan_amt =(float)($_POST['challan_amt'] ?? 0);
+	
 	$comments = mysqli_real_escape_string($con, $_POST['comments']);
 	$deli_status = mysqli_real_escape_string($con, $_POST['deli_status']);
 	$status = mysqli_real_escape_string($con, $_POST['status']);
@@ -339,7 +365,7 @@ if (isset($_POST['add_register']))
 		}  
 	}
 
-	$insert = "INSERT INTO `registered_document`(`token`, `owner_name`, `owner_mobile`, `owner_dob`, `alt_owner_name`, `alt_owner_mobile`, `alt_owner_dob`, `tenant_name`, `tenant_mobile`, `tenant_dob`, `alt_tenant_name`, `alt_tenant_mobile`, `alt_tenant_dob`, `staff_name`, `agent_name`, `agreement_start_date`, `agreement_end_date`, `flat_no`, `floor_no`, `plot_no`, `bldg_nm`, `sector_no`, `location`, `total_amt`, `received_amt`, `challan_amt`, `upload_1`, `upload_2`, `upload_3`, `upload_4`, `upload_5`, `comments`, `delivery_status`, `record_status`,`labels`,  `timestamp`) VALUES ('$token','$owner_name','$owner_mobile','$owner_dob','$alt_owner_name','$alt_owner_mobile','$alt_owner_dob','$tenant_name','$tenant_mobile','$tenant_dob','$alt_tenant_name','$alt_tenant_mobile','$alt_tenant_dob','$staff_name','$agent_name','$agreement_start_date','$agreement_end_date','$flat_no','$floor_no','$plot_no','$bldg_nm','$sector_no','$location','$total_amt','$received_amt','$challan_amt','$pdffiles[0]','$pdffiles[1]','$pdffiles[2]','$pdffiles[3]','$pdffiles[4]','$comments','$deli_status','$status','$labels','$timestamp')";
+	$insert = "INSERT INTO `registered_document`(`token`, `owner_name`, `owner_mobile`, `owner_dob`, `alt_owner_name`, `alt_owner_mobile`, `alt_owner_dob`, `tenant_name`, `tenant_mobile`, `tenant_dob`, `alt_tenant_name`, `alt_tenant_mobile`, `alt_tenant_dob`, `staff_name`, `agent_name`, `agreement_start_date`, `agreement_end_date`, `flat_no`, `floor_no`, `plot_no`, `bldg_nm`, `sector_no`, `location`, `stamp_duty`, `reg_dhc`, `noc`, `staff_incentive`, `agent_paid`, `outside_visit`, `urgent_doc`, `total_amt`, `received_amt`, `challan_amt`, `upload_1`, `upload_2`, `upload_3`, `upload_4`, `upload_5`, `comments`, `delivery_status`, `record_status`,`labels`,  `timestamp`) VALUES ('$token','$owner_name','$owner_mobile','$owner_dob','$alt_owner_name','$alt_owner_mobile','$alt_owner_dob','$tenant_name','$tenant_mobile','$tenant_dob','$alt_tenant_name','$alt_tenant_mobile','$alt_tenant_dob','$staff_name','$agent_name','$agreement_start_date','$agreement_end_date','$flat_no','$floor_no','$plot_no','$bldg_nm','$sector_no','$location', '$stamp_duty','$reg_dhc','$noc','$staff_incentive','$agent_paid','$outside_visit','$urgent_doc','$total_amt','$received_amt','$challan_amt','$pdffiles[0]','$pdffiles[1]','$pdffiles[2]','$pdffiles[3]','$pdffiles[4]','$comments','$deli_status','$status','$labels','$timestamp')";
 	
 	// echo $insert; exit;
 

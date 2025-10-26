@@ -49,9 +49,18 @@
 								$upload_4 = $row_reg["upload_4"];
 								$upload_5 = $row_reg["upload_5"];
 								$delivery_status = $row_reg["delivery_status"];
+
+								$stamp_duty = $row_reg["stamp_duty"];
+								$reg_dhc = $row_reg["reg_dhc"];
+								$noc = $row_reg["noc"];
+								$staff_incentive = $row_reg["staff_incentive"];
+								$agent_paid = $row_reg["agent_paid"];
+								$outside_visit = $row_reg["outside_visit"];
+								$urgent_doc = $row_reg["urgent_doc"];
 								$total_amt = $row_reg["total_amt"];
 								$received_amt = $row_reg["received_amt"];
 								$challan_amt = $row_reg["challan_amt"];
+
 								$comments = $row_reg["comments"];
 								$record_status = $row_reg["record_status"];
 								$labels = $row_reg["labels"];
@@ -394,14 +403,53 @@
 										</td>
 									</tr>
 									<tr>
-            						    <th rowspan="3" class="text-center">Amount</th>
-            							<th class="text-center">Quotation Amount</th>
-            							<td><input type="tel" name="total_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Amount without ',' and '/-'" value="<?php if(!empty($total_amt)){ echo $total_amt; } ?>"></td>
+	        						    <th rowspan="11" class="text-center">Amount</th>
+										<th class="text-center">Stamp Duty</th>
+										<td><input type="tel" name="stamp_duty" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Stamp Duty without ',' and '/-'" value="<?php if(isset($stamp_duty)){ echo $stamp_duty; } ?>"></td>
+									</tr>
+									<tr>
+										<th class="text-center">Reg + DHC</th>
+										<td><input type="tel" name="reg_dhc" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Reg + DHC without ',' and '/-'" value="<?php if(isset($reg_dhc)){ echo $reg_dhc; } ?>"></td>
+									</tr>
+									<tr>
+										<th class="text-center">NOC</th>
+										<td><input type="tel" name="noc" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter NOC ',' and '/-'" value="<?php if(isset($noc)){ echo $noc; } ?>"></td>
+									</tr>
+									<tr>
+										<th class="text-center">Staff Incentive</th>
+										<td><input type="tel" name="staff_incentive" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Staff Incentive without ',' and '/-'" value="<?php if(isset($staff_incentive)){ echo $staff_incentive; } ?>"></td>
+									</tr>
+									<tr>
+										<th class="text-center">Agent Paid</th>
+										<td><input type="tel" name="agent_paid" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Agent Paid without ',' and '/-'"  value="<?php if(isset($agent_paid)){ echo $agent_paid; } ?>"></td>
+									</tr>
+									<tr>
+										<th class="text-center">Outside Visit</th>
+										<td><input type="tel" name="outside_visit" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Outside Visit without ',' and '/-'" value="<?php if(isset($outside_visit)){ echo $outside_visit; } ?>"></td>
+									</tr>
+									<tr>
+										<th class="text-center">Urgent Doc</th>
+										<td><input type="tel" name="urgent_doc" onkeypress="return isNumber(event)" class="form-control border-0 calc-field" placeholder="Enter Urgent Doc without ',' and '/-'" value="<?php if(isset($urgent_doc)){ echo $urgent_doc; } ?>"></td>
+									</tr>
+									<tr>
+            							<th class="text-center">Total Amount</th>
+            							<td><input type="tel" name="total_amt_disply" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Amount without ',' and '/-'" value="<?php if(isset($total_amt)){ echo $total_amt; } ?>" disabled></td>
+            							<input type="hidden" name="total_amt" value="<?php if(isset($total_amt)){ echo $total_amt; } ?>">
             						</tr>
             						<tr>
             							<th class="text-center">Received Amount</th>
-            							<td><input type="tel" name="received_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Amount without ',' and '/-'" value="<?php if(!empty($received_amt)){ echo $received_amt; } ?>"></td>
+            							<td><input type="tel" name="received_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Amount without ',' and '/-'" value="<?php if(isset($received_amt)){ echo $received_amt; } ?>"></td>
             						</tr>
+            						<tr>
+	        							<th class="text-center">Profit / Balance</th>
+	        							<?php
+	        							$balance_amt = 0;
+	        							if(isset($total_amt) && isset($received_amt)){
+	        								$balance_amt = $total_amt - $received_amt;
+	        							}
+	        							?>
+	        							<td><input type="tel" name="balance_amt" onkeypress="return isNumber(event)" class="form-control border-0" value="<?php echo $balance_amt;?>" disabled></td>
+	        						</tr>
     								<tr>
     									<th class="text-center">Challan Amount</th>
     									<td><input type="tel" name="challan_amt" onkeypress="return isNumber(event)" class="form-control border-0" placeholder="Enter Challan Amount without ',' and '/-'" value="<?php if(!empty($challan_amt)){ echo $challan_amt; } ?>"></td>
@@ -766,9 +814,18 @@ if (isset($_POST['upd_register']))
 	$sector_no = mysqli_real_escape_string($con, $_POST['sector_no']);
 	$location = mysqli_real_escape_string($con, $_POST['location']);
 	$deli_status = mysqli_real_escape_string($con, $_POST['deli_status']);
-	$total_amt = mysqli_real_escape_string($con, $_POST['total_amt']);
-	$received_amt = mysqli_real_escape_string($con, $_POST['received_amt']);
-	$challan_amt = mysqli_real_escape_string($con, $_POST['challan_amt']);
+
+	$stamp_duty = (float)($_POST['stamp_duty'] ?? 0);
+	$reg_dhc = (float)($_POST['reg_dhc'] ?? 0);
+	$noc = (float)($_POST['noc'] ?? 0);
+	$staff_incentive = (float)($_POST['staff_incentive'] ?? 0);
+	$agent_paid = (float)($_POST['agent_paid'] ?? 0);
+	$outside_visit = (float)($_POST['outside_visit'] ?? 0);
+	$urgent_doc = (float)($_POST['urgent_doc'] ?? 0);
+	$total_amt = (float)($_POST['total_amt'] ?? 0);
+	$received_amt = (float)($_POST['received_amt'] ?? 0);
+	$challan_amt =(float)($_POST['challan_amt'] ?? 0);
+
 	$comments = mysqli_real_escape_string($con, $_POST['comments']);
 	$status = mysqli_real_escape_string($con, $_POST['status']);
 	$labels = mysqli_real_escape_string($con, $_POST['labels']);
@@ -776,7 +833,7 @@ if (isset($_POST['upd_register']))
 
     if(empty($deli_status))
     {
-    	$update = "UPDATE `registered_document` SET `token`='$token',`owner_name`='$owner_name',`owner_mobile`='$owner_mobile',`owner_dob`='$owner_dob',`alt_owner_name`='$alt_owner_name',`alt_owner_mobile`='$alt_owner_mobile',`alt_owner_dob`='$alt_owner_dob',`tenant_name`='$tenant_name',`tenant_mobile`='$tenant_mobile',`tenant_dob`='$tenant_dob',`alt_tenant_name`='$alt_tenant_name',`alt_tenant_mobile`='$alt_tenant_mobile',`alt_tenant_dob`='$alt_tenant_dob',`staff_name`='$staff_name',`agent_name`='$agent_name',`agreement_start_date`='$agreement_start_date',`agreement_end_date`='$agreement_end_date',`flat_no`='$flat_no',`floor_no`='$floor_no',`plot_no`='$plot_no',`bldg_nm`='$bldg_nm',`sector_no`='$sector_no',`location`='$location',`total_amt`='$total_amt',`received_amt`='$received_amt',`challan_amt`='$challan_amt',`comments`='$comments',`record_status`='$status',`labels`='$labels' WHERE `reg_id` = '$_GET[rid]'";
+    	$update = "UPDATE `registered_document` SET `token`='$token',`owner_name`='$owner_name',`owner_mobile`='$owner_mobile',`owner_dob`='$owner_dob',`alt_owner_name`='$alt_owner_name',`alt_owner_mobile`='$alt_owner_mobile',`alt_owner_dob`='$alt_owner_dob',`tenant_name`='$tenant_name',`tenant_mobile`='$tenant_mobile',`tenant_dob`='$tenant_dob',`alt_tenant_name`='$alt_tenant_name',`alt_tenant_mobile`='$alt_tenant_mobile',`alt_tenant_dob`='$alt_tenant_dob',`staff_name`='$staff_name',`agent_name`='$agent_name',`agreement_start_date`='$agreement_start_date',`agreement_end_date`='$agreement_end_date',`flat_no`='$flat_no',`floor_no`='$floor_no',`plot_no`='$plot_no',`bldg_nm`='$bldg_nm',`sector_no`='$sector_no',`location`='$location', `stamp_duty`='$stamp_duty', `reg_dhc`='$reg_dhc', `noc`='$noc', `staff_incentive`='$staff_incentive', `agent_paid`='$agent_paid', `outside_visit`='$outside_visit', `urgent_doc`='$urgent_doc',`total_amt`='$total_amt',`received_amt`='$received_amt',`challan_amt`='$challan_amt',`comments`='$comments',`record_status`='$status',`labels`='$labels' WHERE `reg_id` = '$_GET[rid]'";
     	// echo $update; exit;
     
     	$res_upd = mysqli_query($con, $update);
@@ -802,7 +859,7 @@ if (isset($_POST['upd_register']))
     }
     else
     {
-        $update = "UPDATE `registered_document` SET `token`='$token',`owner_name`='$owner_name',`owner_mobile`='$owner_mobile',`owner_dob`='$owner_dob',`alt_owner_name`='$alt_owner_name',`alt_owner_mobile`='$alt_owner_mobile',`alt_owner_dob`='$alt_owner_dob',`tenant_name`='$tenant_name',`tenant_mobile`='$tenant_mobile',`tenant_dob`='$tenant_dob',`alt_tenant_name`='$alt_tenant_name',`alt_tenant_mobile`='$alt_tenant_mobile',`alt_tenant_dob`='$alt_tenant_dob',`staff_name`='$staff_name',`agent_name`='$agent_name',`agreement_start_date`='$agreement_start_date',`agreement_end_date`='$agreement_end_date',`flat_no`='$flat_no',`floor_no`='$floor_no',`plot_no`='$plot_no',`bldg_nm`='$bldg_nm',`sector_no`='$sector_no',`location`='$location',`delivery_status`='$deli_status',`total_amt`='$total_amt',`received_amt`='$received_amt',`challan_amt`='$challan_amt',`comments`='$comments',`record_status`='$status',`labels`='$labels' WHERE `reg_id` = '$_GET[rid]'";
+        $update = "UPDATE `registered_document` SET `token`='$token',`owner_name`='$owner_name',`owner_mobile`='$owner_mobile',`owner_dob`='$owner_dob',`alt_owner_name`='$alt_owner_name',`alt_owner_mobile`='$alt_owner_mobile',`alt_owner_dob`='$alt_owner_dob',`tenant_name`='$tenant_name',`tenant_mobile`='$tenant_mobile',`tenant_dob`='$tenant_dob',`alt_tenant_name`='$alt_tenant_name',`alt_tenant_mobile`='$alt_tenant_mobile',`alt_tenant_dob`='$alt_tenant_dob',`staff_name`='$staff_name',`agent_name`='$agent_name',`agreement_start_date`='$agreement_start_date',`agreement_end_date`='$agreement_end_date',`flat_no`='$flat_no',`floor_no`='$floor_no',`plot_no`='$plot_no',`bldg_nm`='$bldg_nm',`sector_no`='$sector_no',`location`='$location', `stamp_duty`='$stamp_duty', `reg_dhc`='$reg_dhc', `noc`='$noc', `staff_incentive`='$staff_incentive', `agent_paid`='$agent_paid', `outside_visit`='$outside_visit', `urgent_doc`='$urgent_doc', `delivery_status`='$deli_status',`total_amt`='$total_amt',`received_amt`='$received_amt',`challan_amt`='$challan_amt',`comments`='$comments',`record_status`='$status',`labels`='$labels' WHERE `reg_id` = '$_GET[rid]'";
     
     	// echo $update; exit;
     

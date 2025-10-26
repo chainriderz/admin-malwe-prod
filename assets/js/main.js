@@ -3,6 +3,33 @@ var FetchStaffs;
 var DataTable;
 $(document).ready(function ()
 {
+  // Function to calculate total from multiple fields
+  function calculateTotal() {
+      let total = 0;
+      $('.calc-field').each(function() {
+          total += parseFloat($(this).val()) || 0;
+      });
+      $('input[name="total_amt_disply"]').val(total);
+      $('input[name="total_amt"]').val(total);
+      calculateBalance(); // also update balance automatically
+  }
+
+  // Function to calculate balance
+  function calculateBalance() {
+      let total = parseFloat($('input[name="total_amt"]').val()) || 0;
+      let received = parseFloat($('input[name="received_amt"]').val()) || 0;
+      let balance = total - received;
+
+      $('input[name="balance_amt_disply"]').val(balance);
+      $('input[name="balance_amt"]').val(balance);
+  }
+
+  // Event: When any calc field changes → update total & balance
+  $('.calc-field').on('input', calculateTotal);
+
+  // Event: When received amount changes → update balance
+  $('input[name="received_amt"]').on('input', calculateBalance);
+  
 	FetchAllDirectories = function()
 	{
 		$.ajax({
