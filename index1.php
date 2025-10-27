@@ -127,9 +127,9 @@ $staff_arr = array_column($staff_data, 'name', 'sid');
 									}
 									?>
 
-									<div class="col-auto">
+									<!-- <div class="col-auto">
 										<button class="btn btn-success" type="button" onclick="exporttoexceldata()" ><i class="fa fa-file-excel-o fa-lg" aria-hidden="true"></i> Download</button>
-									</div>
+									</div> -->
 									
 									<div class="col-auto">
 										<a href="add_register_document.php" class="btn btn-info w-100"><i class="fa fa-user-plus fa-lg" aria-hidden="true"></i> Add New</a>
@@ -209,9 +209,9 @@ $staff_arr = array_column($staff_data, 'name', 'sid');
 				<th>Labels</th>
 			</tr>
 		</thead>
-		<tbody>
+		<!-- <tbody>
 			<?php
-			if(!empty($_SESSION["registered_document_table_data"])){
+			/*if(!empty($_SESSION["registered_document_table_data"])){
 				$excel_data = $_SESSION["registered_document_table_data"];
 				foreach ($excel_data as $key => $row_reg) {
 					$sr = $row_reg["sr_no"];
@@ -232,53 +232,53 @@ $staff_arr = array_column($staff_data, 'name', 'sid');
 					$received_amt = $row_reg["received_amt"];
 					$deli_status = $row_reg["delivery_status"];
 					$record_status = $row_reg["record_status"];
-					$labels = $row_reg["labels"];
+					$labels = $row_reg["labels"];*/
 					?>
 					<tr>
 					<td><?= $sr; ?></td>
-				    <td><?php echo date_format(date_create($timestamp),"Y-m-d"); ?></td>			            	
-					<td><?php echo $token; ?></td>				                
-					<td><?php echo $owner_name; ?></td>
+				    <td><?php //echo date_format(date_create($timestamp),"Y-m-d"); ?></td>			            	
+					<td><?php //echo $token; ?></td>				                
+					<td><?php //echo $owner_name; ?></td>
 					<td>
 					    <?php
-					        if(!empty($owner_mobile))
-					        {
+					        /*if(!empty($owner_mobile))
+					        {*/
 					    ?>
-					        <a href="tel:+91<?php echo $owner_mobile; ?>" class="">+91 <?php echo $owner_mobile; ?></a>
+					        <a href="tel:+91<?php //echo $owner_mobile; ?>" class="">+91 <?php //echo $owner_mobile; ?></a>
 					    <?php
-					        }
+					        //}
 					    ?>
 					</td>
-					<td><?php echo $tenant_name; ?></td>
+					<td><?php //echo $tenant_name; ?></td>
 					<td><?php
-					        if(!empty($tenant_mobile))
-					        {
+					        /*if(!empty($tenant_mobile))
+					        {*/
 					    ?>
-					        <a href="tel:+91<?php echo $tenant_mobile; ?>" class="">+91 <?php echo $tenant_mobile; ?></a>
+					        <a href="tel:+91<?php //echo $tenant_mobile; ?>" class="">+91 <?php //echo $tenant_mobile; ?></a>
 					    <?php
-					        }
+					        //}
 					    ?>
 					</td>
-					<td><?php echo $staff_name; ?></td>
-					<td><?php echo $agent_name; ?></td>
-					<td><?php echo $agreement_start_date; ?></td>
-					<td><?php echo $agreement_end_date; ?></td>
-					<td><?php echo $location; ?></td>
+					<td><?php //echo $staff_name; ?></td>
+					<td><?php //echo $agent_name; ?></td>
+					<td><?php //echo $agreement_start_date; ?></td>
+					<td><?php //echo $agreement_end_date; ?></td>
+					<td><?php //echo $location; ?></td>
 					<td>
 					    <?php
-					    	$amt = $received_amt - $total_amt;
-					        echo showProfitBal($amt);
+					    	/*$amt = $received_amt - $total_amt;
+					        echo showProfitBal($amt);*/
 					    ?>
 					</td>
-					<td><?php echo $deli_status; ?></td>
-					<td><?php echo $record_status; ?></td>
-					<td><?php echo $labels; ?></td>
+					<td><?php //echo $deli_status; ?></td>
+					<td><?php //echo $record_status; ?></td>
+					<td><?php //echo $labels; ?></td>
 					</tr>
 				<?php
-				}
-			}
+				/*}
+			}*/
 			?>
-		</tbody>
+		</tbody> -->
 	</table>
 </div>
 
