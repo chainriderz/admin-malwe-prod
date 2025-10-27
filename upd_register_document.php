@@ -817,8 +817,11 @@ if (isset($_POST['upd_register']))
 
 	$comments = mysqli_real_escape_string($con, $_POST['comments']);
 	$status = mysqli_real_escape_string($con, $_POST['status']);
+	$timestamp = false;
+	if(strtolower($record_status) != 'active' && strtolower($status) == 'active'){
+		$timestamp = date('Y-m-d');
+	}
 	$labels = mysqli_real_escape_string($con, $_POST['labels']);
-	$timestamp = date('Y-m-d');
 
     if(empty($deli_status))
     {
@@ -828,23 +831,26 @@ if (isset($_POST['upd_register']))
     	$res_upd = mysqli_query($con, $update);
     
     	if ($res_upd)
-       {
-        //   $upd_usrs = "UPDATE `users` SET `entry_date` = '$timestamp', `fname` = '$owner_name', `mobile` = '$owner_mobile' ";
-        //   $res_usrs = mysqli_query($con_dp, $upd_usrs);
-          echo "<script language='javascript'>
-              window.alert('Details have been updated successfully');
-               window.location.href='index1.php'; 
-          </script>
-          ";
-       }
-       else
-       {
-          echo "<script language='javascript'>
-              window.alert('There may be a technical problem, please try again later!');
-               window.location.href=''; 
-          </script>
-          ";
-       }
+		{
+			if($timestamp !== false){
+		   		$upd_timestamp = "UPDATE `registered_document` SET `timestamp` = '$timestamp' WHERE `reg_id` = '$_GET[rid]' ";
+		   		mysqli_query($con, $upd_timestamp);
+			}
+
+			echo "<script language='javascript'>
+			  window.alert('Details have been updated successfully');
+			   window.location.href='index1.php'; 
+			</script>
+			";
+		}
+		else
+		{
+			echo "<script language='javascript'>
+			  window.alert('There may be a technical problem, please try again later!');
+			   window.location.href=''; 
+			</script>
+			";
+		}
     }
     else
     {
@@ -855,23 +861,26 @@ if (isset($_POST['upd_register']))
     	$res_upd = mysqli_query($con, $update);
     
     	if ($res_upd)
-       {
-        //   $upd_usrs = "UPDATE `users` SET `entry_date` = '$timestamp', `fname` = '$owner_name', `mobile` = '$owner_mobile' ";
-        //   $res_usrs = mysqli_query($con_dp, $upd_usrs);
-          echo "<script language='javascript'>
-              window.alert('Details have been updated successfully');
-               window.location.href='index1.php'; 
-          </script>
-          ";
-       }
-       else
-       {
-          echo "<script language='javascript'>
-              window.alert('There may be a technical problem, please try again later!');
-               window.location.href=''; 
-          </script>
-          ";
-       }
+		{
+			if($timestamp !== false){
+		   		$upd_timestamp = "UPDATE `registered_document` SET `timestamp` = '$timestamp' WHERE `reg_id` = '$_GET[rid]' ";
+		   		mysqli_query($con, $upd_timestamp);
+			}
+
+			echo "<script language='javascript'>
+			  window.alert('Details have been updated successfully');
+			   window.location.href='index1.php'; 
+			</script>
+			";
+		}
+		else
+		{
+			echo "<script language='javascript'>
+			  window.alert('There may be a technical problem, please try again later!');
+			   window.location.href=''; 
+			</script>
+			";
+		}
     }
 }
 
