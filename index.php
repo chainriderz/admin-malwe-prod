@@ -646,7 +646,17 @@
 				<th colspan="6" class="text-center d-none">Address</th>
 				<th rowspan="2" class="text-center noExl">Location</th>
 				<th rowspan="2" class="d-none">Uploads (5 PDFs)</th>
-				<th rowspan="2">Amount(in Rs.)</th>
+				<th rowspan="2">Stamp Duty</th>
+				<th rowspan="2">Reg + DHC</th>
+				<th rowspan="2">NOC</th>
+				<th rowspan="2">Staff Incentive</th>
+				<th rowspan="2">Agent Paid</th>
+				<th rowspan="2">Outside Visit</th>
+				<th rowspan="2">Urgent Doc</th>
+				<th rowspan="2">Total Amount</th>
+				<th rowspan="2">Received Amount</th>
+				<th rowspan="2">Quotation Amount</th>
+				<th rowspan="2">Amount</th>
 				<th rowspan="2">Delivery Status</th>
 				<th rowspan="2">Records Status<br></th>
 				<th rowspan="2" class="d-none">Comments</th> 
@@ -701,6 +711,15 @@
 						$upload_4 = $row_reg["upload_4"];
 						$upload_5 = $row_reg["upload_5"];
 						$comments = $row_reg["comments"];
+
+						$stamp_duty = $row_reg["stamp_duty"];
+						$reg_dhc = $row_reg["reg_dhc"];
+						$noc = $row_reg["noc"];
+						$staff_incentive = $row_reg["staff_incentive"];
+						$agent_paid = $row_reg["agent_paid"];
+						$outside_visit = $row_reg["outside_visit"];
+						$urgent_doc = $row_reg["urgent_doc"];
+						$challan_amt = $row_reg["challan_amt"];
 						$total_amt = $row_reg["total_amt"];
 						$received_amt = $row_reg["received_amt"];
 						$deli_status = $row_reg["delivery_status"];
@@ -777,6 +796,16 @@
 					</ul>				                	              		
 				</td>
 				<td class="noExl"><?php echo $location; ?></td>
+				<td><?php echo $stamp_duty; ?></td>
+				<td><?php echo $reg_dhc; ?></td>
+				<td><?php echo $noc; ?></td>
+				<td><?php echo $staff_incentive; ?></td>
+				<td><?php echo $agent_paid; ?></td>
+				<td><?php echo $outside_visit; ?></td>
+				<td><?php echo $urgent_doc; ?></td>
+				<td><?php echo $total_amt; ?></td>
+				<td><?php echo $received_amt; ?></td>
+				<td><?php echo $challan_amt; ?></td>
 				<td>
 				    <?php
 				        if(!empty($total_amt) || !empty($received_amt))
